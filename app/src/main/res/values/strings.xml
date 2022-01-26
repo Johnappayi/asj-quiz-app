@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Quiz</string>
+    <string name="our_quiz_app">Our Quiz App</string>
+    <string name="begin">Begin</string>
+    <string name="todo">TODO</string>
+    <string name="logo">logo</string>
+    <string name="photography_quiz">Photography Quiz</string>
+    <string name="submit">SUBMIT</string>
+    <string name="question_no">Question No:</string>
+    <string name="score">Score:</string>
+    <string name="pagelogo">pagelogo</string>
+    <string name="back_to_home">Back to Home</string>
+    <string name="congratualations">Congratulations🥳</string>
+    <string name="your_scored">YOUR SCORE</string>
+    <string name="_0_50">0/50</string>
+    <string name="developed_by_nightrose_creations">Developed by NIGHTROSE CREATIONS</string>
+    <string name="option_b">Option B</string>
+    <string name="SampleQuestion">TextView</string>
+    <string name="option_a">Option A</string>
+    <string name="question">Question</string>
+    <string name="option_c">Option C</string>
+    <string name="option_d">Option D</string>
+</resources>
