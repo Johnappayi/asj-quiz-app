@@ -1,7 +1,10 @@
 package com.example.quiz
 
 
+import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.res.ColorStateList
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -25,6 +28,7 @@ class SecondActivity : AppCompatActivity() {
     private var questionNo : Int = 0
     private var score : Int = 0
     private var answer : String =""
+    private var canGoNext : Boolean = false
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,11 +54,17 @@ class SecondActivity : AppCompatActivity() {
 
         display(questionNo)
     }
+
+    @SuppressLint("ResourceAsColor")
     fun clearAll(){
         optionATxt.isChecked = false
         optionBTxt.isChecked = false
         optionCTxt.isChecked = false
         optionDTxt.isChecked = false
+        optionATxt.setTextColor(Color.parseColor("#000000"))
+        optionBTxt.setTextColor(Color.parseColor("#000000"))
+        optionCTxt.setTextColor(Color.parseColor("#000000"))
+        optionDTxt.setTextColor(Color.parseColor("#000000"))
 
     }
 
@@ -67,10 +77,8 @@ class SecondActivity : AppCompatActivity() {
         optionDTxt.text =questionObject.optionD
         questionNumberTxt.text ="Question No: "+(questionNo + 1).toString()
         scoreboardTxt.text ="Score: "+(score).toString()
-
-
-
     }
+
     fun setUpQuestion(){
         questionBank.add(
             Question(
@@ -175,9 +183,23 @@ class SecondActivity : AppCompatActivity() {
         )
 
     }
+
     fun isCorrect(value : String) : Boolean{
         return answer == value
     }
+
+    fun corectAns(value : String) {
+        if(optionATxt.text == value ) {
+            optionATxt.setTextColor(Color.parseColor("#008000"))
+        }else if(optionBTxt.text == value){
+            optionBTxt.setTextColor(Color.parseColor("#008000"))
+        }else if(optionCTxt.text == value) {
+            optionCTxt.setTextColor(Color.parseColor("#008000"))
+        }else{
+            optionDTxt.setTextColor(Color.parseColor("#008000"))
+        }
+    }
+
     fun initListeners(){
         optionATxt.setOnClickListener {
             clearAll()
@@ -204,25 +226,35 @@ class SecondActivity : AppCompatActivity() {
 
         }
         submitTxt.setOnClickListener {
-            clearAll()
-            if(isCorrect(questionBank.get(questionNo).answer)){
-                score = score + 10 ;
-                scoreboardTxt.text = score.toString()
-            }
-            if( questionNo < (questionBank.size - 1) ) {
-                questionNo++
-                display(questionNo)
+            canGoNext =!canGoNext
+            if(canGoNext){
+                if(isCorrect(questionBank.get(questionNo).answer)){
+                    score = score + 10 ;
+                    scoreboardTxt.text = "Score: "+score.toString()
+                }
+                corectAns(questionBank.get(questionNo).answer)
+                submitTxt.text = "NEXT"
             }else{
-                //go to next page
-                var intent = Intent(this , ResultActivity::class.java)
-                intent.putExtra("score" , score.toString() )
-                startActivity(intent)
+                clearAll()
+                submitTxt.text = "SUBMIT"
+                if (questionNo < (questionBank.size - 1)) {
+                    questionNo++
+                    display(questionNo)
+                } else {
+                    //go to next page
+                    var intent = Intent(this, ResultActivity::class.java)
+                    intent.putExtra("score", score.toString())
+                    startActivity(intent)
+                    finish()
+                }
 
             }
 
         }
+
     }
 }
+
 
 data class Question(
     var question : String ,

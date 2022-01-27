@@ -40,7 +40,7 @@
         android:layout_width="140dp"
         android:layout_height="59dp"
         android:text="@string/begin"
-        app:backgroundTint="#FF9800"
+        app:backgroundTint="#FEBA12"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
