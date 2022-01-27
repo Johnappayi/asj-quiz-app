@@ -1,3 +1,3 @@
 # ASJ-Quiz-app
 Hello there 
-Check out the master branch for an Photography Quiz App
+Check out the master branch for a Photography Quiz App
