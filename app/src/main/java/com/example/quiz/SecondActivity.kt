@@ -3,48 +3,46 @@ package com.example.quiz
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.content.res.ColorStateList
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.RadioButton
 import android.widget.TextView
-import com.example.quiz.R
+import androidx.appcompat.app.AppCompatActivity
 
 class SecondActivity : AppCompatActivity() {
 
-    private lateinit var scoreboardTxt : TextView
-    private lateinit var questionNumberTxt : TextView
-    private lateinit var questionTxt : TextView
-    private lateinit var optionATxt : RadioButton
-    private lateinit var optionBTxt : RadioButton
-    private lateinit var optionCTxt : RadioButton
-    private lateinit var optionDTxt : RadioButton
-    private lateinit var submitTxt : Button
+    private lateinit var scoreboardTxt: TextView
+    private lateinit var questionNumberTxt: TextView
+    private lateinit var questionTxt: TextView
+    private lateinit var optionATxt: RadioButton
+    private lateinit var optionBTxt: RadioButton
+    private lateinit var optionCTxt: RadioButton
+    private lateinit var optionDTxt: RadioButton
+    private lateinit var submitTxt: Button
 
 
-    private lateinit var  questionBank : ArrayList<Question>
-    private var questionNo : Int = 0
-    private var score : Int = 0
-    private var answer : String =""
-    private var canGoNext : Boolean = false
+    private lateinit var questionBank: ArrayList<Question>
+    private var questionNo: Int = 0
+    private var score: Int = 0
+    private var answer: String = ""
+    private var canGoNext: Boolean = false
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_second)
 
-        scoreboardTxt  = findViewById(R.id.textView4)
+        scoreboardTxt = findViewById(R.id.textView4)
         questionNumberTxt = findViewById(R.id.textView2)
-        questionTxt  = findViewById(R.id.textView10)
+        questionTxt = findViewById(R.id.textView10)
 
-        optionATxt  = findViewById(R.id.radioButton1)
-        optionBTxt  = findViewById(R.id.radioButton2)
-        optionCTxt  = findViewById(R.id.radioButton3)
-        optionDTxt  = findViewById(R.id.radioButton4)
+        optionATxt = findViewById(R.id.radioButton1)
+        optionBTxt = findViewById(R.id.radioButton2)
+        optionCTxt = findViewById(R.id.radioButton3)
+        optionDTxt = findViewById(R.id.radioButton4)
 
-        submitTxt  = findViewById(R.id.button3)
+        submitTxt = findViewById(R.id.button3)
 
         questionBank = ArrayList()
 
@@ -56,7 +54,7 @@ class SecondActivity : AppCompatActivity() {
     }
 
     @SuppressLint("ResourceAsColor")
-    fun clearAll(){
+    fun clearAll() {
         optionATxt.isChecked = false
         optionBTxt.isChecked = false
         optionCTxt.isChecked = false
@@ -68,18 +66,18 @@ class SecondActivity : AppCompatActivity() {
 
     }
 
-    fun display(index: Int){
+    fun display(index: Int) {
         var questionObject = questionBank.get(index)
-        questionTxt.text =questionObject.question
-        optionATxt.text =questionObject.optionA
-        optionBTxt.text =questionObject.optionB
-        optionCTxt.text =questionObject.optionC
-        optionDTxt.text =questionObject.optionD
-        questionNumberTxt.text ="Question No: "+(questionNo + 1).toString()
-        scoreboardTxt.text ="Score: "+(score).toString()
+        questionTxt.text = questionObject.question
+        optionATxt.text = questionObject.optionA
+        optionBTxt.text = questionObject.optionB
+        optionCTxt.text = questionObject.optionC
+        optionDTxt.text = questionObject.optionD
+        questionNumberTxt.text = "Question No: " + (questionNo + 1).toString()
+        scoreboardTxt.text = "Score: " + (score).toString()
     }
 
-    fun setUpQuestion(){
+    fun setUpQuestion() {
         questionBank.add(
             Question(
                 "What does DSLR stand for?",
@@ -184,57 +182,57 @@ class SecondActivity : AppCompatActivity() {
 
     }
 
-    fun isCorrect(value : String) : Boolean{
+    fun isCorrect(value: String): Boolean {
         return answer == value
     }
 
-    fun corectAns(value : String) {
-        if(optionATxt.text == value ) {
+    fun corectAns(value: String) {
+        if (optionATxt.text == value) {
             optionATxt.setTextColor(Color.parseColor("#008000"))
-        }else if(optionBTxt.text == value){
+        } else if (optionBTxt.text == value) {
             optionBTxt.setTextColor(Color.parseColor("#008000"))
-        }else if(optionCTxt.text == value) {
+        } else if (optionCTxt.text == value) {
             optionCTxt.setTextColor(Color.parseColor("#008000"))
-        }else{
+        } else {
             optionDTxt.setTextColor(Color.parseColor("#008000"))
         }
     }
 
-    fun initListeners(){
+    fun initListeners() {
         optionATxt.setOnClickListener {
             clearAll()
             optionATxt.isChecked = true
-            answer =  optionATxt.text.toString()
+            answer = optionATxt.text.toString()
 
         }
         optionBTxt.setOnClickListener {
             clearAll()
             optionBTxt.isChecked = true
-            answer =  optionBTxt.text.toString()
+            answer = optionBTxt.text.toString()
 
         }
-        optionCTxt.setOnClickListener{
+        optionCTxt.setOnClickListener {
             clearAll()
             optionCTxt.isChecked = true
-            answer =  optionCTxt.text.toString()
+            answer = optionCTxt.text.toString()
 
         }
         optionDTxt.setOnClickListener {
             clearAll()
             optionDTxt.isChecked = true
-            answer =  optionDTxt.text.toString()
+            answer = optionDTxt.text.toString()
 
         }
         submitTxt.setOnClickListener {
-            canGoNext =!canGoNext
-            if(canGoNext){
-                if(isCorrect(questionBank.get(questionNo).answer)){
-                    score = score + 10 ;
-                    scoreboardTxt.text = "Score: "+score.toString()
+            canGoNext = !canGoNext
+            if (canGoNext) {
+                if (isCorrect(questionBank[questionNo].answer)) {
+                    score += 10
+                    scoreboardTxt.text = "Score: " + score.toString()
                 }
-                corectAns(questionBank.get(questionNo).answer)
+                corectAns(questionBank[questionNo].answer)
                 submitTxt.text = "NEXT"
-            }else{
+            } else {
                 clearAll()
                 submitTxt.text = "SUBMIT"
                 if (questionNo < (questionBank.size - 1)) {
@@ -257,10 +255,10 @@ class SecondActivity : AppCompatActivity() {
 
 
 data class Question(
-    var question : String ,
-    var optionA : String ,
-    var optionB : String ,
-    var optionC : String ,
-    var optionD : String ,
-    var answer : String
+    var question: String,
+    var optionA: String,
+    var optionB: String,
+    var optionC: String,
+    var optionD: String,
+    var answer: String
 )
